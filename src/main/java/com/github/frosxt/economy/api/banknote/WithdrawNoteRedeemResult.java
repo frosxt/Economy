@@ -12,15 +12,19 @@ import java.math.BigDecimal;
  */
 public sealed interface WithdrawNoteRedeemResult {
 
-    record Success(CurrencyKey currency, BigDecimal amount, BalanceSnapshot newBalance)
-            implements WithdrawNoteRedeemResult {}
+    record Success(CurrencyKey currency, BigDecimal amount, BalanceSnapshot newBalance) implements WithdrawNoteRedeemResult {
+    }
 
     /** Item did not carry this module's withdraw-note marker. Ignore it. */
-    record NotAWithdrawNote() implements WithdrawNoteRedeemResult {}
+    record NotAWithdrawNote() implements WithdrawNoteRedeemResult {
+    }
 
-    record AlreadyConsumed() implements WithdrawNoteRedeemResult {}
+    record AlreadyConsumed() implements WithdrawNoteRedeemResult {
+    }
 
-    record UnknownCurrency(CurrencyKey currency) implements WithdrawNoteRedeemResult {}
+    record UnknownCurrency(CurrencyKey currency) implements WithdrawNoteRedeemResult {
+    }
 
-    record Failed(String reason) implements WithdrawNoteRedeemResult {}
+    record Failed(String reason) implements WithdrawNoteRedeemResult {
+    }
 }
