@@ -1,0 +1,329 @@
+version: 1
+enabled: true
+
+type: MONEY
+
+display-name: "Coins"
+singular-name: "coin"
+plural-name: "coins"
+
+number-format:
+  scale: 2
+  use-grouping: true
+  suffixes-enabled: false
+  round-mode: DOWN
+
+rules:
+  transferable: true
+  withdraw-enabled: true
+  leaderboard-enabled: true
+  paytoggle-enabled: true
+  allow-decimals: true
+  default-balance: 0
+  min-balance: 0
+  max-balance: -1
+
+command:
+  base-command: "money"
+  description: "The money base command"
+  aliases:
+    - "bal"
+    - "balance"
+  permission-root: "prisoncore.economy.money"
+  sub-commands:
+    help: true
+    give: true
+    take: true
+    set: true
+    pay: true
+    top: true
+    recalc: true
+    balance: true
+    withdraw: true
+    paytoggle: true
+
+withdraw-item:
+  enabled: true
+  material: "PAPER"
+  enchanted: true
+  name: "&2&l[&a&l$&2&l] &a$%amount% Note &7(Right-Click)"
+  lore:
+    - " "
+    - "&aInformation"
+    - "&a→ &7Amount: &f$%amount%"
+    - "&a→ &7From: &f%player%"
+    - " "
+    - "&7&o(( Right-Click to redeem this note! ))"
+
+menus:
+  top-menu:
+    enabled: true
+    title: "&8&lMONEY LEADERBOARD"
+    rows: 3
+    top-slots: [10, 11, 12, 13, 14, 15, 16]
+    borders:
+      gray:
+        material: "GRAY_STAINED_GLASS_PANE"
+        name: " "
+        lore: []
+        slots:
+          - "0-26"
+      green:
+        material: "GREEN_STAINED_GLASS_PANE"
+        name: " "
+        lore: []
+        slots:
+          - "9-17"
+    invalid-item:
+      material: "PLAYER_HEAD"
+      skull: "MHF_Question"
+      name: "&4&l[&c&l!&4&l] &c???"
+      lore: []
+    valid-item:
+      material: "PLAYER_HEAD"
+      skull: "%player%"
+      name: "&2&l[&a&l$&2&l] &a%player% &7(#%rank%)"
+      lore:
+        - " "
+        - "&aInformation"
+        - "&a→ &7Rank: &f#%rank%"
+        - "&a→ &7Balance: &f$%amount%"
+    stats-item:
+      enabled: true
+      slot: 22
+      material: "PLAYER_HEAD"
+      skull: "%player%"
+      name: "&2&l[&a&l$&2&l] &a%player% &7(#%rank%)"
+      lore:
+        - " "
+        - "&aInformation"
+        - "&a→ &7Rank: &f#%rank%"
+        - "&a→ &7Balance: &f$%amount%"
+
+messages:
+  balance:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Your balance: &a$%amount%"
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  balance-other:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &a%player%&7's balance: &a$%amount%"
+
+  given-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You gave &a%player% $%amount%&7."
+
+  given-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You received &a$%amount%&7."
+
+  invalid-player:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 player."
+
+  invalid-number:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 number."
+
+  not-enough:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You don't have enough &cmoney&7."
+
+  payments-toggled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player%&7 isn't accepting payments at this moment."
+
+  payment-sent:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You sent &a$%amount%&7 to &a%player%&7."
+
+  payment-received:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You received &a$%amount%&7 from &a%player%&7."
+
+  payments-enabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &aenabled&7 money payments from other players."
+
+  payments-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &cdisabled&7 money payments from other players."
+
+  top-updating:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Starting recalculation of the &aMoney&7 leaderboard."
+
+  top-updated:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Successfully recalculated the &aMoney&7 leaderboard. &7(Took %time%ms)"
+
+  redeemed-note:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have redeemed &a$%amount%&7."
+
+  no-permission:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou don't have permission to do that."
+
+  player-only:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThis command can only be used by players."
+
+  pay-self:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou cannot pay yourself."
+
+  not-transferable:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cMoney is not transferable."
+
+  transaction-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cTransaction failed for &f%player%&c."
+
+  exceeds-max:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player% is at the maximum balance (&f$%max%&c)."
+
+  below-min:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThat would drop %player% below the minimum balance (&f$%min%&c)."
+
+  taken-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You took &a$%amount%&7 from &a%player%&7."
+
+  taken-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You had &a$%amount%&7 taken from your balance."
+
+  set-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Set &a%player%&7's balance to &a$%amount%&7."
+
+  set-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Your balance has been set to &a$%amount%&7."
+
+  withdraw-success:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have withdrawn &a$%amount%&7 as a note."
+
+  withdraw-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cMoney withdrawals are disabled."
+
+  withdraw-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cWithdrawal failed: &f%reason%&c."
+
+  player-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lMoney Help"
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&e&lCOMMANDS:"
+        - "&e&l→ &7/money pay <player> <amount>"
+        - "&e&l→ &7/money withdraw <amount>"
+        - "&e&l→ &7/money balance [player]"
+        - "&e&l→ &7/money paytoggle"
+        - "&e&l→ &7/money help"
+        - "&e&l→ &7/money top"
+        - " "
+        - "&6&m------------------------------------------"
+
+  admin-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lMoney Admin Help"
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&e&lADMIN COMMANDS:"
+        - "&e&l→ &7/money give <player> <amount>"
+        - "&e&l→ &7/money take <player> <amount>"
+        - "&e&l→ &7/money set <player> <amount>"
+        - "&e&l→ &7/money recalc"
+        - " "
+        - "&e&lPLAYER COMMANDS:"
+        - "&e&l→ &7/money pay <player> <amount>"
+        - "&e&l→ &7/money withdraw <amount>"
+        - "&e&l→ &7/money balance [player]"
+        - "&e&l→ &7/money paytoggle"
+        - "&e&l→ &7/money help"
+        - "&e&l→ &7/money top"
+        - " "
+        - "&6&m------------------------------------------"

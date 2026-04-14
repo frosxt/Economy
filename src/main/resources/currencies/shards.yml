@@ -1,0 +1,333 @@
+version: 1
+enabled: true
+
+type: VIRTUAL
+
+display-name: "Shards"
+singular-name: "shard"
+plural-name: "shards"
+
+number-format:
+  scale: 0
+  use-grouping: true
+  suffixes-enabled: false
+  round-mode: DOWN
+
+rules:
+  transferable: true
+  withdraw-enabled: true
+  leaderboard-enabled: true
+  paytoggle-enabled: true
+  allow-decimals: false
+  default-balance: 0
+  min-balance: 0
+  max-balance: -1
+
+command:
+  base-command: "shards"
+  description: "The shards base command"
+  aliases:
+    - "shard"
+  permission-root: "prisoncore.economy.shards"
+  sub-commands:
+    help: true
+    give: true
+    take: true
+    set: true
+    pay: true
+    top: true
+    recalc: true
+    balance: true
+    withdraw: true
+    paytoggle: true
+
+withdraw-item:
+  enabled: true
+  material: "PRISMARINE_SHARD"
+  enchanted: true
+  name: "&b&l[&3&l!&b&l] &b%amount%x Shard(s) &7(Right-Click)"
+  lore:
+    - " "
+    - "&bInformation"
+    - "&b→ &7Shards: &f%amount%x"
+    - "&b→ &7From: &f%player%"
+    - " "
+    - "&7&o(( Right-Click to redeem &f&o%amount%x&7&o shard(s)! ))"
+
+menus:
+  top-menu:
+    enabled: true
+    title: "&8&lSHARDS LEADERBOARD"
+    rows: 3
+    top-slots: [10, 11, 12, 13, 14, 15, 16]
+    borders:
+      gray:
+        material: "GRAY_STAINED_GLASS_PANE"
+        name: " "
+        lore: []
+        slots:
+          - "0-26"
+      cyan:
+        material: "CYAN_STAINED_GLASS_PANE"
+        name: " "
+        lore: []
+        slots:
+          - "9-17"
+    invalid-item:
+      material: "PLAYER_HEAD"
+      skull: "MHF_Question"
+      name: "&4&l[&c&l!&4&l] &c???"
+      lore: []
+    valid-item:
+      material: "PLAYER_HEAD"
+      skull: "%player%"
+      name: "&b&l[&3&l!&b&l] &b%player% &7(#%rank%)"
+      lore:
+        - " "
+        - "&bInformation"
+        - "&b→ &7Rank: &f#%rank%"
+        - "&b→ &7Shards: &f%amount%x"
+    stats-item:
+      enabled: true
+      slot: 22
+      material: "PLAYER_HEAD"
+      skull: "%player%"
+      name: "&b&l[&3&l!&b&l] &b%player% &7(#%rank%)"
+      lore:
+        - " "
+        - "&bInformation"
+        - "&b→ &7Rank: &f#%rank%"
+        - "&b→ &7Shards: &f%amount%x"
+
+messages:
+  balance:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &b%amount%x&7 shards."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  balance-other:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &b%player%&7 has &b%amount%x&7 shards."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  given-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have given &b%player% %amount%x&7 shard(s)."
+
+  given-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have received &b%amount%x&7 shard(s)."
+
+  invalid-player:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 player."
+
+  invalid-number:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 number."
+
+  not-enough:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You don't have enough &cshards&7 to do this."
+
+  payments-toggled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player%&7 isn't accepting payments at this moment."
+
+  payment-sent:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You sent &b%amount%x&7 shard(s) to &b%player%&7."
+
+  payment-received:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You received &b%amount%x&7 shard(s) from &b%player%&7."
+
+  payments-enabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &benabled&7 shard payments from other players."
+
+  payments-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &cdisabled&7 shard payments from other players."
+
+  top-updating:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Starting recalculation of the &bShards&7 leaderboard."
+
+  top-updated:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Successfully recalculated the &bShards&7 leaderboard. &7(Took %time%ms)"
+
+  redeemed-note:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have redeemed &b%amount%x&7 shard(s)."
+
+  no-permission:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou don't have permission to do that."
+
+  player-only:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThis command can only be used by players."
+
+  pay-self:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou cannot pay yourself."
+
+  not-transferable:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cShards are not transferable."
+
+  transaction-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cTransaction failed for &f%player%&c."
+
+  exceeds-max:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player% is at the maximum shards balance (&f%max%x&c)."
+
+  below-min:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThat would drop %player% below the minimum shards balance (&f%min%x&c)."
+
+  taken-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You took &b%amount%x&7 shard(s) from &b%player%&7."
+
+  taken-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You had &b%amount%x&7 shard(s) taken from your balance."
+
+  set-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Set &b%player%&7's shards to &b%amount%x&7."
+
+  set-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Your shards balance has been set to &b%amount%x&7."
+
+  withdraw-success:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have withdrawn &b%amount%x&7 shard(s) as a note."
+
+  withdraw-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cShards withdrawals are disabled."
+
+  withdraw-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cWithdrawal failed: &f%reason%&c."
+
+  admin-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lShards Admin Help"
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&e&lADMIN COMMANDS:"
+        - "&e&l→ &7/shards give <player> <amount>"
+        - "&e&l→ &7/shards take <player> <amount>"
+        - "&e&l→ &7/shards set <player> <amount>"
+        - "&e&l→ &7/shards recalc"
+        - " "
+        - "&e&lPLAYER COMMANDS:"
+        - "&e&l→ &7/shards pay <player> <amount>"
+        - "&e&l→ &7/shards withdraw <amount>"
+        - "&e&l→ &7/shards balance [player]"
+        - "&e&l→ &7/shards paytoggle"
+        - "&e&l→ &7/shards help"
+        - "&e&l→ &7/shards top"
+        - " "
+        - "&6&m------------------------------------------"
+
+  player-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lShards Help"
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&e&lCOMMANDS:"
+        - "&e&l→ &7/shards pay <player> <amount>"
+        - "&e&l→ &7/shards withdraw <amount>"
+        - "&e&l→ &7/shards balance [player]"
+        - "&e&l→ &7/shards paytoggle"
+        - "&e&l→ &7/shards help"
+        - "&e&l→ &7/shards top"
+        - " "
+        - "&6&m------------------------------------------"

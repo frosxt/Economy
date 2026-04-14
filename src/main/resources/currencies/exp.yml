@@ -1,0 +1,262 @@
+version: 1
+enabled: true
+
+type: EXP
+
+display-name: "Experience"
+singular-name: "point"
+plural-name: "points"
+
+number-format:
+  scale: 0
+  use-grouping: true
+  suffixes-enabled: false
+  round-mode: DOWN
+
+rules:
+  transferable: false
+  withdraw-enabled: false
+  leaderboard-enabled: true
+  paytoggle-enabled: false
+  allow-decimals: false
+  default-balance: 0
+  min-balance: 0
+  max-balance: -1
+
+command:
+  base-command: "exp"
+  description: "The experience base command"
+  aliases:
+    - "experience"
+    - "xp"
+  permission-root: "prisoncore.economy.exp"
+  sub-commands:
+    help: true
+    give: true
+    take: true
+    set: true
+    pay: false
+    top: false
+    recalc: false
+    balance: true
+    withdraw: false
+    paytoggle: false
+
+withdraw-item:
+  enabled: false
+  material: "EXPERIENCE_BOTTLE"
+  enchanted: false
+  name: "&b%amount% Experience"
+  lore: []
+
+menus:
+  top-menu:
+    enabled: false
+
+messages:
+  balance:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &b%amount%&7 experience points."
+
+  balance-other:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &b%player%&7 has &b%amount%&7 experience points."
+
+  given-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You gave &b%player% %amount%&7 experience."
+
+  given-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You received &b%amount%&7 experience."
+
+  invalid-player:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 player."
+
+  invalid-number:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 number (must be a whole number)."
+
+  not-enough:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You don't have enough &cexperience&7."
+
+  no-permission:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou don't have permission to do that."
+
+  player-only:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThis command can only be used by players."
+
+  pay-self:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou cannot pay yourself."
+
+  not-transferable:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cExperience is not transferable."
+
+  transaction-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cTransaction failed for &f%player%&c."
+
+  exceeds-max:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player% is at the maximum experience (&f%max%&c)."
+
+  below-min:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThat would drop %player% below the minimum experience (&f%min%&c)."
+
+  taken-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You took &b%amount%&7 experience from &b%player%&7."
+
+  taken-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You had &b%amount%&7 experience taken from your balance."
+
+  set-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Set &b%player%&7's experience to &b%amount%&7."
+
+  set-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Your experience has been set to &b%amount%&7."
+
+  payments-toggled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player%&7 isn't accepting payments."
+
+  payment-sent:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You sent &b%amount%&7 experience to &b%player%&7."
+
+  payment-received:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You received &b%amount%&7 experience from &b%player%&7."
+
+  payments-enabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &benabled&7 experience payments from other players."
+
+  payments-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &cdisabled&7 experience payments from other players."
+
+  withdraw-success:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have withdrawn &b%amount%&7 experience."
+
+  withdraw-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cExperience withdrawals are disabled."
+
+  withdraw-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cWithdrawal failed: &f%reason%&c."
+
+  redeemed-note:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have redeemed &b%amount%&7 experience."
+
+  top-updating:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Starting recalculation of the &bExperience&7 leaderboard."
+
+  top-updated:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Successfully recalculated the &bExperience&7 leaderboard. &7(Took %time%ms)"
+
+  player-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lExperience Help"
+        - " "
+        - "&e&lCOMMANDS:"
+        - "&e&l→ &7/exp balance [player]"
+        - "&e&l→ &7/exp help"
+        - " "
+        - "&6&m------------------------------------------"
+
+  admin-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &bExperience Admin Help"
+        - " "
+        - "&e&lADMIN COMMANDS:"
+        - "&e&l→ &7/exp give <player> <amount>"
+        - "&e&l→ &7/exp take <player> <amount>"
+        - "&e&l→ &7/exp set <player> <amount>"
+        - " "
+        - "&e&lPLAYER COMMANDS:"
+        - "&e&l→ &7/exp balance [player]"
+        - "&e&l→ &7/exp help"
+        - " "
+        - "&6&m------------------------------------------"

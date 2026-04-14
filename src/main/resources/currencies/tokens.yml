@@ -1,0 +1,422 @@
+version: 1
+enabled: true
+
+type: VIRTUAL
+
+display-name: "Tokens"
+singular-name: "token"
+plural-name: "tokens"
+
+number-format:
+  scale: 0
+  use-grouping: true
+  suffixes-enabled: false
+  round-mode: DOWN
+
+rules:
+  transferable: true
+  withdraw-enabled: true
+  leaderboard-enabled: true
+  paytoggle-enabled: true
+  allow-decimals: false
+  default-balance: 0
+  min-balance: 0
+  max-balance: -1
+
+command:
+  base-command: "tokens"
+  description: "The tokens base command"
+  aliases:
+    - "token"
+  permission-root: "prisoncore.economy.tokens"
+  sub-commands:
+    help: true
+    give: true
+    take: true
+    set: true
+    pay: true
+    top: true
+    recalc: true
+    balance: true
+    withdraw: true
+    paytoggle: true
+
+withdraw-item:
+  enabled: true
+  material: "GOLD_NUGGET"
+  enchanted: true
+  name: "&6&l[&e&l!&6&l] &e%amount%x Token(s) &7(Right-Click)"
+  lore:
+    - " "
+    - "&eInformation"
+    - "&e→ &7Tokens: &f%amount%x"
+    - "&e→ &7From: &f%player%"
+    - " "
+    - "&7&o(( Right-Click to redeem &f&o%amount%x&7&o token(s)! ))"
+
+menus:
+  top-menu:
+    enabled: true
+    title: "&8&lTOKENS LEADERBOARD"
+    rows: 3
+    top-slots: [10, 11, 12, 13, 14, 15, 16]
+    borders:
+      gray:
+        material: "GRAY_STAINED_GLASS_PANE"
+        name: " "
+        lore: []
+        slots:
+          - "0-26"
+      orange:
+        material: "ORANGE_STAINED_GLASS_PANE"
+        name: " "
+        lore: []
+        slots:
+          - "9-17"
+    invalid-item:
+      material: "PLAYER_HEAD"
+      skull: "MHF_Question"
+      name: "&4&l[&c&l!&4&l] &c???"
+      lore: []
+    valid-item:
+      material: "PLAYER_HEAD"
+      skull: "%player%"
+      name: "&6&l[&e&l!&6&l] &e%player% &7(#%rank%)"
+      lore:
+        - " "
+        - "&eInformation"
+        - "&e→ &7Rank: &f#%rank%"
+        - "&e→ &7Tokens: &f%amount%x"
+        - " "
+        - "&7&o(( &f&o%player%&7&o has &f&o%amount%x&7&o tokens! ))"
+    stats-item:
+      enabled: true
+      slot: 22
+      material: "PLAYER_HEAD"
+      skull: "%player%"
+      name: "&6&l[&e&l!&6&l] &e%player% &7(#%rank%)"
+      lore:
+        - " "
+        - "&eInformation"
+        - "&e→ &7Rank: &f#%rank%"
+        - "&e→ &7Tokens: &f%amount%x"
+        - " "
+        - "&7&o(( You have &f&o%amount%x&7&o tokens! ))"
+
+messages:
+  balance:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &e%amount%x&7 tokens."
+    action-bar:
+      enabled: false
+      value: ""
+    title:
+      enabled: false
+      title: ""
+      subtitle: ""
+      fade-in: 10
+      stay: 40
+      fade-out: 10
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  balance-other:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &e%player%&7 has &e%amount%x&7 tokens."
+    action-bar:
+      enabled: false
+      value: ""
+    title:
+      enabled: false
+      title: ""
+      subtitle: ""
+      fade-in: 10
+      stay: 40
+      fade-out: 10
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  given-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have given &e%player% %amount%x&7 token(s)."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  given-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have received &e%amount%x&7 token(s)."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  taken-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have taken &e%amount%x&7 token(s) from &e%player%&7."
+
+  taken-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7An admin took &e%amount%x&7 token(s) from your balance."
+
+  set-sender:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You set &e%player%&7's balance to &e%amount%x&7 token(s)."
+
+  set-receiver:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Your token balance has been set to &e%amount%x&7."
+
+  invalid-player:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 player."
+    sound:
+      enabled: true
+      value: "entity.villager.no"
+      volume: 1.0
+      pitch: 1.0
+
+  invalid-number:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have specified an &cinvalid&7 number."
+    sound:
+      enabled: true
+      value: "entity.villager.no"
+      volume: 1.0
+      pitch: 1.0
+
+  not-enough:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You don't have enough &ctokens&7 to do this."
+    sound:
+      enabled: true
+      value: "entity.villager.no"
+      volume: 1.0
+      pitch: 1.0
+
+  payments-toggled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player%&7 isn't accepting payments at this moment."
+    sound:
+      enabled: true
+      value: "entity.villager.no"
+      volume: 1.0
+      pitch: 1.0
+
+  payment-sent:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You sent &e%amount%x&7 token(s) to &e%player%&7."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  payment-received:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You received &e%amount%x&7 token(s) from &e%player%&7."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  payments-enabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &eenabled&7 token payments from other players."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  payments-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have &cdisabled&7 token payments from other players."
+    sound:
+      enabled: true
+      value: "entity.villager.no"
+      volume: 1.0
+      pitch: 1.0
+
+  top-updating:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Starting recalculation of the &eTokens&7 leaderboard."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  top-updated:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7Successfully recalculated the &eTokens&7 leaderboard. &7(Took %time%ms)"
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  redeemed-note:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have redeemed &e%amount%x&7 token(s)."
+    sound:
+      enabled: true
+      value: "block.note_block.pling"
+      volume: 1.0
+      pitch: 1.0
+
+  no-permission:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou don't have permission to do that."
+
+  player-only:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThis command can only be used by players."
+
+  pay-self:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cYou cannot pay yourself."
+
+  not-transferable:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cTokens are not transferable."
+
+  transaction-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cTransaction failed for &f%player%&c."
+
+  exceeds-max:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &c%player% is at the maximum token balance (&f%max%x&c)."
+
+  below-min:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cThat would drop %player% below the minimum token balance (&f%min%x&c)."
+
+  withdraw-success:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &7You have withdrawn &e%amount%x&7 token(s) as a note."
+
+  withdraw-disabled:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cToken withdrawals are disabled."
+
+  withdraw-failed:
+    chat:
+      enabled: true
+      value:
+        - "&e&lPrisons &8&l→ &cWithdrawal failed: &f%reason%&c."
+
+  admin-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lTokens Admin Help"
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&e&lADMIN COMMANDS:"
+        - "&e&l→ &7/tokens give <player> <amount>"
+        - "&e&l→ &7/tokens take <player> <amount>"
+        - "&e&l→ &7/tokens set <player> <amount>"
+        - "&e&l→ &7/tokens recalc"
+        - " "
+        - "&e&lPLAYER COMMANDS:"
+        - "&e&l→ &7/tokens pay <player> <amount>"
+        - "&e&l→ &7/tokens withdraw <amount>"
+        - "&e&l→ &7/tokens balance [player]"
+        - "&e&l→ &7/tokens paytoggle"
+        - "&e&l→ &7/tokens help"
+        - "&e&l→ &7/tokens top"
+        - " "
+        - "&6&m------------------------------------------"
+
+  player-help:
+    chat:
+      enabled: true
+      value:
+        - "&6&m------------------------------------------"
+        - " "
+        - "&e&lPrisons &8&l→ &e&lTokens Help"
+        - " "
+        - "&7&o<> = Required"
+        - "&7&o[] = Optional"
+        - " "
+        - "&e&lCOMMANDS:"
+        - "&e&l→ &7/tokens pay <player> <amount>"
+        - "&e&l→ &7/tokens withdraw <amount>"
+        - "&e&l→ &7/tokens balance [player]"
+        - "&e&l→ &7/tokens paytoggle"
+        - "&e&l→ &7/tokens help"
+        - "&e&l→ &7/tokens top"
+        - " "
+        - "&6&m------------------------------------------"
