@@ -296,4 +296,4 @@ If the issue is specifically with the PrisonCore platform rather than this modul
 
 ## License
 
-See `LICENSE` in the repository root.
+See [LICENSE](https://github.com/frosxt/Economy/blob/master/LICENSE).
