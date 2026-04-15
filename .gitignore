@@ -20,6 +20,9 @@
 *.rar
 *.kt
 
+# Keep the Gradle wrapper jar tracked so JitPack and fresh clones can bootstrap.
+!gradle/wrapper/gradle-wrapper.jar
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*

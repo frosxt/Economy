@@ -3,23 +3,16 @@
 # Storage backend selection is global and lives in PrisonCore's core.yml.
 
 leaderboard:
-  # Whether to rebuild every currency leaderboard when the module enables.
   # When false, startup uses the persisted snapshots from the backend.
   rebuild-on-enable: true
 
-  # Maximum number of entries tracked per currency leaderboard.
   max-entries: 100
 
-  # Seconds between automatic leaderboard recalculations for every currency.
   # Set to 0 to disable auto-recalc (admins can still use /<currency> recalc).
   recalc-interval-seconds: 300
-
 storage:
   # Milliseconds between write-behind flushes for balances and ledger entries.
   # Lower = more frequent writes, higher = more coalescing.
   flush-interval-millis: 2000
-
 vault:
-  # Whether to register a Vault economy provider for the MONEY currency.
-  # When false, Vault plugins will not see this economy module even if Vault is installed.
   enabled: true

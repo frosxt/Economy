@@ -2,8 +2,8 @@ package com.github.frosxt.economy.command.sub;
 
 import com.github.frosxt.economy.api.EconomyService;
 import com.github.frosxt.economy.api.currency.CurrencyDefinition;
-import com.github.frosxt.economy.api.currency.NumberFormatPolicy;
 import com.github.frosxt.economy.api.transaction.BalanceSnapshot;
+import com.github.frosxt.economy.format.BalanceFormatter;
 import com.github.frosxt.economy.message.EconomyMessageDispatcher;
 import com.github.frosxt.prisoncore.command.api.CommandDescriptor;
 import com.github.frosxt.prisoncore.command.api.CommandResult;
@@ -14,10 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -94,12 +91,6 @@ public final class BalanceSubcommand {
     }
 
     static String formatAmount(final BigDecimal amount, final CurrencyDefinition definition) {
-        final NumberFormatPolicy policy = definition.numberFormat();
-        final BigDecimal scaled = amount.setScale(policy.scale(), RoundingMode.DOWN);
-        final NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
-        formatter.setGroupingUsed(policy.useGrouping());
-        formatter.setMinimumFractionDigits(policy.scale());
-        formatter.setMaximumFractionDigits(policy.scale());
-        return formatter.format(scaled);
+        return BalanceFormatter.format(amount, definition.numberFormat());
     }
 }
